@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sun, Phone, Mail, MapPin, ArrowUp } from 'lucide-react';
+import { Phone, Mail, MapPin, ArrowUp } from 'lucide-react';
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -48,15 +48,11 @@ export default function Footer() {
           {/* Column 1: Company Profile */}
           <div className="space-y-4">
             <a href="#" className="flex items-center space-x-2 group">
-              <Sun className="h-8 w-8 text-primary animate-spin-slow" />
-              <div className="flex flex-col">
-                <span className="font-display font-extrabold text-xl tracking-tight text-white">
-                  MIRROR<span className="text-primary">SOLAR</span>
-                </span>
-                <span className="text-[9px] uppercase tracking-widest font-semibold text-primary/80 -mt-1 leading-none">
-                  Vision
-                </span>
-              </div>
+              <img 
+                src="/logo.png" 
+                alt="Mirror Solar Vision Logo" 
+                className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
+              />
             </a>
             <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
               Powering Andhra Pradesh With Clean Energy. We provide modern, custom solar energy systems designed to reduce monthly utility costs by up to 90%.

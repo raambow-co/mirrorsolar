@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sun, Menu, X, MessageSquare } from 'lucide-react';
+import { Menu, X, MessageSquare } from 'lucide-react';
 
 const navItems = [
   { name: 'Services', href: '#services' },
@@ -32,22 +32,11 @@ export default function Navbar() {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <a href="#" className="flex items-center space-x-2 group">
-              <div className="relative">
-                <Sun className="h-8 w-8 text-cyan-400 animate-spin-slow" />
-                <motion.div 
-                  className="absolute inset-0 bg-cyan-400/20 rounded-full blur-sm"
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ repeat: Infinity, duration: 3 }}
-                />
-              </div>
-              <div className="flex flex-col">
-                <span className="font-display font-extrabold text-xl sm:text-2xl tracking-tight text-white">
-                  MIRROR<span className="text-cyan-400 font-bold">SOLAR</span>
-                </span>
-                <span className="text-[9px] uppercase tracking-widest font-semibold text-cyan-400/80 -mt-1 leading-none">
-                  Vision
-                </span>
-              </div>
+              <img 
+                src="/logo.png" 
+                alt="Mirror Solar Vision Logo" 
+                className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
+              />
             </a>
 
             {/* Desktop Navigation */}
