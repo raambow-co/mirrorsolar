@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Eye, MapPin, X, ArrowRight, Layers, ChevronLeft, ChevronRight } from 'lucide-react';
+import { MapPin, X, ArrowRight, Layers, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const projectsData = [
   {
@@ -107,7 +107,7 @@ const projectsData = [
 
 export default function Projects() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
+
 
   const [lightboxProject, setLightboxProject] = useState(null);
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
@@ -121,12 +121,11 @@ export default function Projects() {
   const total = projectsData.length;
 
   useEffect(() => {
-    if (isHovered) return;
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % total);
-    }, 5500);
+    }, 3500);
     return () => clearInterval(interval);
-  }, [isHovered, total]);
+  }, [total]);
 
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev - 1 + total) % total);
@@ -162,8 +161,6 @@ export default function Projects() {
         <div 
           className="relative max-w-7xl mx-auto px-2 sm:px-12 select-none"
           style={{ perspective: "1200px" }}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
         >
           {/* Navigation Arrows */}
           <button
@@ -216,9 +213,9 @@ export default function Projects() {
               return (
                 <div
                   key={proj.id}
-                  onClick={() => !isActive && setCurrentIndex(idx)}
+                  onClick={() => isActive ? setLightboxProject(proj) : setCurrentIndex(idx)}
                   className={`absolute w-[290px] sm:w-[420px] bg-white rounded-3xl overflow-hidden shadow-premium border border-neutral-200 flex flex-col text-left group select-none ${
-                    isActive ? 'cursor-default' : 'cursor-pointer hover:border-primary/40'
+                    isActive ? 'cursor-pointer' : 'cursor-pointer hover:border-primary/40'
                   }`}
                   style={{
                     transform: `translateX(${tx}px) translateZ(${tz}px) rotateY(${rotY}deg) scale(${scale})`,
@@ -237,24 +234,10 @@ export default function Projects() {
                       className="w-full h-full object-cover select-none pointer-events-none"
                     />
                     
-                    {/* Overlay on hover (only active card handles it) */}
-                    {isActive && (
-                      <div className="absolute inset-0 bg-deep-blue/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setLightboxProject(proj);
-                          }}
-                          className="p-3 bg-white text-deep-blue rounded-full shadow-lg hover:scale-110 transition-transform duration-200"
-                        >
-                          <Eye className="h-5 w-5 stroke-[2]" />
-                        </button>
-                      </div>
-                    )}
+
 
                     {/* Location Badge */}
                     <div className="absolute bottom-3 left-3 inline-flex items-center space-x-1 px-2.5 py-1 bg-black/60 backdrop-blur-sm text-white rounded-full text-[10px] sm:text-xs font-semibold">
-                      <MapPin className="h-3 w-3 text-accent shrink-0" />
                       <span className="truncate max-w-[120px] sm:max-w-none">{proj.location}</span>
                     </div>
 
